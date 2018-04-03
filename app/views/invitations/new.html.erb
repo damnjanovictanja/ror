@@ -1,3 +1,4 @@
+<h3> New Email </h3>
 <p> 
     Enter a comma or space separated list of emails addresses you wish to invite.
 </p>
@@ -6,17 +7,18 @@
 <%= form_with scope: :invitation, url: invitations_path, local: true do |form| %>
   <p>
     <%= form.label :all_emails %><br>
-    <%= form.text_area :email, cols: "100", rows: "10" %>
+    <%= form.text_area :all_emails, cols: "100", rows: "10" %>
   </p>
 
-  <% if @invitation.errors.any? %>
+
+	<% if @invalids.try(:any?) %>
     <div id="error_explanation">
       <p style="color:red;">
-        The following errors occured:
+        The following emails are not valid:
 		</p>
       <ul>
-        <% @invitation.errors.full_messages.each do |msg| %>
-          <li style="color:red;"><%= msg %></li>
+        <% @invalids.each do |inv| %>
+          <li style="color:red;"><%= inv %></li>
         <% end %>
       </ul>
       
