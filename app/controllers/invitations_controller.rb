@@ -27,6 +27,7 @@ class InvitationsController < ApplicationController
 				@invitation = Invitation.new(parameters.permit(:email, :message))
 				@invitation.save
 			end
+			redirect_to @invitation
 		else
 			all_emails.split(/\s*,\s*/).each do |email|
 				@invalids.push(email) unless (email =~ /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
@@ -34,8 +35,8 @@ class InvitationsController < ApplicationController
 			raw_parameters = {:email => all_emails, :message => message}
 			parameters = ActionController::Parameters.new(raw_parameters)
 			@invitation = Invitation.new(parameters.permit(:email, :message))
+			render 'new'
 		end
-		render 'new'
 	end	
 
 	private
