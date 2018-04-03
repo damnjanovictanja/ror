@@ -1,0 +1,41 @@
+<p> 
+    Enter a comma or space separated list of emails addresses you wish to invite.
+</p>
+
+
+<%= form_with scope: :invitation, url: invitations_path, local: true do |form| %>
+  <p>
+    <%= form.label :all_emails %><br>
+    <%= form.text_area :email, cols: "100", rows: "10" %>
+  </p>
+
+  <% if @invitation.errors.any? %>
+    <div id="error_explanation">
+      <p style="color:red;">
+        The following errors occured:
+		</p>
+      <ul>
+        <% @invitation.errors.full_messages.each do |msg| %>
+          <li style="color:red;"><%= msg %></li>
+        <% end %>
+      </ul>
+      
+    </div>
+  <% end %>
+
+
+
+  <p>
+    Enter invitation text. This will be email that will be received to let these users 
+    know what they are being invited to.
+  </p>
+  <p>
+    <%= form.label :message %><br>
+    <%= form.text_area :message, cols: "100", rows: "10" %>
+  </p>
+ 
+  <p>
+    <%= form.submit "Invite Users" %>
+	<%= link_to 'Cancel', invitations_path %>
+  </p>
+<% end %>

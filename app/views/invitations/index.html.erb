@@ -1,0 +1,17 @@
+<h1> Sent mails</h1>
+
+<%= link_to 'New email', new_invitation_path %>
+
+<table>
+  <tr>
+    <th>Receiver</th>
+    <th>Message</th>
+  </tr>
+ 
+  <% @invitations.each do |invitation| %>
+    <tr>
+      <td><%= invitation.email %></td>
+      <td><%= invitation.message %></td>
+    </tr>
+  <% end %>
+</table>
